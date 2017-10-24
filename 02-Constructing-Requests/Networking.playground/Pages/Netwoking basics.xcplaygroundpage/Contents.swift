@@ -45,7 +45,7 @@ let session = URLSession.shared
 
 // 4
 let downloadTask = session.dataTask(with: request) { (data, response, error) in
-    
+
 }
 
 // 5

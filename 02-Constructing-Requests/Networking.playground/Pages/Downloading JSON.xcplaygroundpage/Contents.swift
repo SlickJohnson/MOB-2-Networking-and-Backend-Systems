@@ -32,7 +32,7 @@ let task = session.dataTask(with: request) { (data, response, error) in
     
     if let data = data {
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        print(json)
+//        print(json)
     }
 }
 
@@ -89,7 +89,7 @@ postReq.httpBody = jsonData
 session.dataTask(with: postReq) { (data, resp, err) in
     if let data = data {
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        print(json)
+//        print(json)
     }
 }.resume()
 
@@ -101,7 +101,25 @@ session.dataTask(with: postReq) { (data, resp, err) in
  2. Find some JSON API resources online and use URLSession to download the JSON
 
 */
+enum httpMethods: String {
+  case get = "GET"
+  case post = "POST"
+  case put = "PUT"
+  case patch = "PATCH"
+  case delete = "DELETE"
+}
 
+var apiURL = URL(string: "https://dog.ceo/api/breeds/list/all")!
+var apiGetReq = URLRequest(url: apiURL)
+
+apiGetReq.httpMethod = httpMethods.get.rawValue
+
+session.dataTask(with: apiGetReq) { data, resp, err in
+  if let data = data {
+    let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+    print(json)
+  }
+}.resume()
 
 /*: ## Resources
  [URLSessions](https://www.raywenderlich.com/158106/urlsession-tutorial-getting-started)
